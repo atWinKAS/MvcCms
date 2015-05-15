@@ -1,0 +1,7 @@
+/admin/post/create
+/admin/login
+
+
+login data:
+u: admin
+p: Passw0rd1234
