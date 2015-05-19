@@ -14,23 +14,6 @@ namespace MvcCms.App_Start
     {
         public async static Task RegisterAdmin()
         {
-            using (var users = new UserRepository())
-            {
-                var user = await users.GetUserByNameAsync("admin");
-
-                if (user == null)
-                {
-                    var adminUser = new CmsUser
-                    {
-                        UserName = "admin",
-                        Email = "admin@cms.com",
-                        DisplayName = "Administrator"
-                    };
-
-                    await users.CreateAsync(adminUser, "Passw0rd1234");
-                }
-            }
-
             using (var roles = new RoleRepository())
             {
                 if (await roles.GetRoleByNameAsync("admin") == null)
@@ -48,6 +31,29 @@ namespace MvcCms.App_Start
                     await roles.CreateAsync(new IdentityRole("author"));
                 }
             }
+
+
+            using (var users = new UserRepository())
+            {
+                var user = await users.GetUserByNameAsync("admin");
+
+                if (user == null)
+                {
+                    var adminUser = new CmsUser
+                    {
+                        UserName = "admin",
+                        Email = "admin@cms.com",
+                        DisplayName = "Administrator"
+                    };
+
+                    await users.CreateAsync(adminUser, "Passw0rd1234");
+
+                    await users.AddUserToRoleAsync(adminUser, "admin");
+                }
+            }
+
+
+
         }
     }
 }

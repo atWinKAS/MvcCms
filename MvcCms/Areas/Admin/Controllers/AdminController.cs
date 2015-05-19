@@ -37,7 +37,7 @@ namespace MvcCms.Areas.Admin.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         [Route("login")]
         [AllowAnonymous]
@@ -144,6 +144,45 @@ namespace MvcCms.Areas.Admin.Controllers
             }
 
             return PartialView("_menuLink", item);
+        }
+
+        [AllowAnonymous]
+        public async Task<PartialViewResult> InfoLink()
+        {
+            var item = new AdminMenuItem
+                       {
+                           Text = "Info",
+                           Action = "info",
+                           RouteInfo = new { controller = "admin", area = "admin" }
+                       };
+            return this.PartialView(item);
+        }
+
+        [HttpGet]
+        [Route("info")]
+        [AllowAnonymous]
+        public async Task<ActionResult> Info()
+        {
+            var model = new InfoViewModel();
+            string userName = User.Identity.Name;
+            var user = await _users.GetUserByNameAsync(userName);
+
+            if (user == null)
+            {
+                model.Message = "No user info";
+                return View(model);
+            }
+
+            model.UserName = userName;
+            model.DisplayName = user.DisplayName;
+            model.Email = user.Email;
+
+            var userRoles = await _users.GetRolesForUserAsync(user);
+            model.Roles = string.Join(", ", userRoles);
+            
+            model.IsAuthenticated = User.Identity.IsAuthenticated;
+
+            return View(model);
         }
 
         private bool _isDisposed;
