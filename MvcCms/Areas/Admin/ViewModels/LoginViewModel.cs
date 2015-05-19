@@ -9,7 +9,7 @@ namespace MvcCms.Areas.Admin.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Username")]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
@@ -18,4 +18,4 @@ namespace MvcCms.Areas.Admin.ViewModels
         [Display(Name = "Remember Me")]
         public bool RememberMe { get; set; }
     }
-}
+}   

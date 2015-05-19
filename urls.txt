@@ -1,6 +1,7 @@
 /admin/post/create
 /admin/login
 /admin/user
+/admin/user/create
 
 
 login data:
