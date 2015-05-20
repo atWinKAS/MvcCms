@@ -26,6 +26,8 @@ namespace MvcCms.Controllers
         [Route("")]
         public async Task<ActionResult> Index()
         {
+            ViewBag.BackgroundImage = "Images/home-bg.jpg";
+
             var posts = await _posts.GetPageAsync(1, _pageSize);
 
             ViewBag.PreviousPage = 0;
@@ -54,6 +56,8 @@ namespace MvcCms.Controllers
         [Route("posts/{postId}")]
         public async Task<ActionResult> Post(string postId)
         {
+            ViewBag.BackgroundImage = "../Images/home-bg.jpg";
+
             var post = _posts.Get(postId);
 
             if (post == null)

@@ -1,15 +1,28 @@
 ﻿@model MvcCms.Models.Post
 
 
-@if (ViewBag.IsIndex)
-{
-    <h2>@Html.ActionLink(Model.Title, "post", new {controller = "home", postId = Model.Id })</h2>
-}
-else
-{
-    <h2>@Model.Title</h2>
-}
 
-<p>@Html.Raw(Model.Content)</p>
-<p>By: @Model.Author.DisplayName</p>
-<p>Tags: @Html.Partial("_renderTags", Model.Tags)</p>
+<div class="post-preview">
+    @if (ViewBag.IsIndex)
+    {
+        <h2 class="post-title">
+            @Html.ActionLink(Model.Title, "post", new { controller = "home", postId = Model.Id })
+        </h2>
+
+    }
+    else
+    {
+        <h2 class="post-title">
+            @Model.Title
+        </h2>
+    }
+    
+    <p>@Html.Raw(Model.Content)</p>
+
+
+    <p class="post-meta">Posted by <a href="#">@Model.Author.DisplayName</a> @Model.Published</p>
+    <p>Tags: @Html.Partial("_renderTags", Model.Tags)</p>
+</div>
+
+
+

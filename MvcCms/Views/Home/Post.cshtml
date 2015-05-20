@@ -7,5 +7,14 @@
     ViewBag.IsIndex = false;
 }
 
-@Html.Partial("_renderPost", Model)
 
+
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                @Html.Partial("_renderPost", Model)
+            </div>
+        </div>
+    </div>
+</article>

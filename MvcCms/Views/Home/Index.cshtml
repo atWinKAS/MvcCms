@@ -6,18 +6,51 @@
     ViewBag.IsIndex = true;
 }
 
-<h2>Index</h2>
 
-@Html.Raw(string.Join("<hr/>", Model.Select(p => Html.Partial("_renderPost", p))))
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            
+            @Html.Raw(string.Join("<hr/>", Model.Select(p => Html.Partial("_renderPost", p))))
 
-@if (ViewBag.PreviousPage > 0)
-{
-    @Html.ActionLink("Previous Page", "page", new { controller = "home", page = ViewBag.PreviousPage })
-}
+            <!-- Pager -->
+            <ul class="pager">
+                
+                @if (ViewBag.PreviousPage > 0)
+                {
+                    <li class="next">
+                        @Html.ActionLink("Previous Page", "page", new { controller = "home", page = ViewBag.PreviousPage })
+                    </li>
+                }
 
-&nbsp;
+                
+                @if (ViewBag.NextPage > -1)
+                {
+                    <li class="next">
+                        @Html.ActionLink("Next Page", "page", new { controller = "home", page = ViewBag.NextPage })
+                    </li>
+                }
+                
+            </ul>
+        </div>
+    </div>
+</div>
 
-@if (ViewBag.NextPage > -1)
-{
-    @Html.ActionLink("Next Page", "page", new { controller = "home", page = ViewBag.NextPage })
-}
+
+
+    @*<h2>Index</h2>
+
+    @Html.Raw(string.Join("<hr/>", Model.Select(p => Html.Partial("_renderPost", p))))
+
+    @if (ViewBag.PreviousPage > 0)
+    {
+        @Html.ActionLink("Previous Page", "page", new { controller = "home", page = ViewBag.PreviousPage })
+    }
+
+    &nbsp;
+
+    @if (ViewBag.NextPage > -1)
+    {
+        @Html.ActionLink("Next Page", "page", new { controller = "home", page = ViewBag.NextPage })
+    }*@
